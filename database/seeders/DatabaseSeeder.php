@@ -29,20 +29,20 @@ class DatabaseSeeder extends Seeder
 
         $infos = [
             'store_open' => 1,
-            'whatsapp_number' => '5585996325360',
-            'address' => 'Rua Estado Do Rio, 1112 - Demócrito Rocha',
-            'open_days' => 'Segunda a Domingo',
-            'opening_hours' => '18:00 às 01:00',
+            'whatsapp_number' => '5585989038733',
+            'address' => 'Rua Emílio de Menezes, 788 - Bonsucesso',
+            'open_days' => 'Terça a Domingo',
+            'opening_hours' => '07:00 às 02:00',
             'social_links' => [
                 [
                     'social' => 'Instagram',
-                    'link' => 'https://instagram.com/sushiakyy/',
-                    'user' => '@sushiakyy',
+                    'link' => 'https://instagram.com/mikaelapizzaria_/',
+                    'user' => '@mikaelapizzaria_',
                 ],
                 [
                     'social' => 'Facebook',
-                    'link' => 'https://www.facebook.com/people/Sushi-aky/61559616506599/',
-                    'user' => 'Sushi-aky',
+                    'link' => 'https://www.facebook.com/pizzaria.mikaela.7',
+                    'user' => 'pizzaria.mikaela.7',
                 ],
             ],
         ];
