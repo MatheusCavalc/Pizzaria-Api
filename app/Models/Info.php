@@ -17,4 +17,8 @@ class Info extends Model
         'opening_hours',
         'social_links',
     ];
+
+    protected $casts = [
+        'social_links' => 'array',
+    ];
 }
