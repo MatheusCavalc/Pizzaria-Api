@@ -37,9 +37,10 @@ const addToCart = (product) => {
 </script>
 
 <template>
+
     <Head title="Mikaela Pizzaria" />
 
-    <AppLayout :cart="cart" :total_items="total_items" :total_value="total_value">
+    <AppLayout :cart="cart" :total_items="total_items" :total_value="total_value" :infos="infos">
         <!--Home Section-->
         <section class="bg-home py-40">
             <div class="flex justify-center">
@@ -50,8 +51,21 @@ const addToCart = (product) => {
                 </div>
             </div>
 
-            <div class="mt-3">
+            <div class="mt-3 space-y-2">
                 <p class="text-4xl font-bold text-center text-white font-title">Mikaela Pizzaria</p>
+
+                <div class="flex justify-center">
+                    <p v-if="infos.store_open"
+                        class="py-1 px-4 order-1 lg:order-2 w-fit text-white rounded-lg border border-red-500 mt-auto animate-pulse">
+                        <p class="text-center lg:text-left mt-auto">Aberto</p>
+                    </p>
+
+                    <p v-else
+                        class="py-1 px-4 order-1 lg:order-2 w-fit text-white rounded-lg border border-red-500 mt-auto">
+                        <p class="text-center lg:text-left mt-auto">Fechado</p>
+                    </p>
+                </div>
+
                 <p class="text-center text-white">{{ infos.address }}</p>
             </div>
 

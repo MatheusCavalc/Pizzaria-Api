@@ -8,7 +8,7 @@ import Modal from '@/Components/Modal.vue';
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
-const props = defineProps(['cart', 'total_items', 'total_value'])
+const props = defineProps(['cart', 'total_items', 'total_value', 'infos'])
 
 const modalFormProduct = ref(false)
 const modalFormBuy = ref(false)
@@ -40,7 +40,7 @@ const backToCart = () => {
 }
 
 const continueBuy = () => {
-    const number = "5585985597635";
+    const number = props.infos.whatsapp_number;
     const addressText = "Endereço: " + address.value;
     const paymentText = "Pagamento: " + payment.value;
 
