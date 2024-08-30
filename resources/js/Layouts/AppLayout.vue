@@ -60,11 +60,12 @@ const continueBuy = () => {
 
     const url = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(pedido)}`;
 
-    window.open(url, "_blank");
+    if (address.value && payment.value) {
+        window.open(url, "_blank");
+        modalFormProduct.value = false;
+        address.value = payment.value = '';
+    }
 
-    modalFormProduct.value = false;
-    address.value = '';
-    payment.value = '';
 }
 </script>
 
