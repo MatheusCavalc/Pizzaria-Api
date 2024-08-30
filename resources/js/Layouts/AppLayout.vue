@@ -15,6 +15,7 @@ const modalFormBuy = ref(false)
 
 const address = ref('')
 const payment = ref('')
+const change = ref('')
 
 let menu = ref(false)
 
@@ -43,6 +44,7 @@ const continueBuy = () => {
     const number = props.infos.whatsapp_number;
     const addressText = "Endereço: " + address.value;
     const paymentText = "Pagamento: " + payment.value;
+    const changeText = 'Troco para: ' + change.value
 
     let pedido = "Pedidos:\n";
 
@@ -51,6 +53,10 @@ const continueBuy = () => {
     });
 
     pedido += `\n${addressText}\n${paymentText}`;
+
+    if (payment.value === "Dinheiro") {
+        pedido += `\n${changeText}`;
+    }
 
     const url = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(pedido)}`;
 
@@ -166,7 +172,7 @@ const continueBuy = () => {
             <div class="mt-6">
                 <p class="text-2xl font-bold tracking-tight text-center text-red-700">Preencha o
                     formulário para
-                    fechar a compra</p>
+                    finalizar a compra</p>
             </div>
 
             <div class="mx-4 mt-4">
@@ -183,11 +189,20 @@ const continueBuy = () => {
                     <select id="payment" v-model="payment" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                         <option selected disabled>Escolha um metodo de Pagamento</option>
+                        <option value="Dinheiro">Dinheiro</option>
                         <option value="Pix">Pix</option>
                         <option value="Cartao de Crédito">Cartao de Crédito</option>
                         <option value="Cartao de Debito">Cartao de Debito</option>
                     </select>
                 </div>
+                <Transition>
+                    <div v-show="payment == 'Dinheiro'" class="mb-6 transition-all duration-100">
+                        <label for="change" class="block mb-2 text-sm font-medium text-gray-900">Troco Para</label>
+                        <input type="text" id="address" placeholder="Troco" v-model="change"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                            required>
+                    </div>
+                </Transition>
             </div>
 
             <div class="flex flex-row-reverse mt-10 mr-4">
