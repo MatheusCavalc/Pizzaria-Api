@@ -23,8 +23,10 @@ const showMenu = () => {
     menu.value = !menu.value
 }
 
-const removeFromCart = (product_id) => {
-    router.get(route('removeFromCart', product_id), {}, {
+const removeFromCart = (product_name) => {
+    //console.log(product_name)
+    //return
+    router.get(route('removeFromCart', product_name), {}, {
         preserveScroll: true,
         preserveState: true
     })
@@ -134,7 +136,7 @@ const continueBuy = () => {
 
                         <div class="flex justify-end gap-2 mt-1">
                             <p>R${{ product.price.replace('.', ',') }}</p>
-                            <button class="text-red-700" @click="removeFromCart(product.id)">
+                            <button class="text-red-700" @click="removeFromCart(product.name)">
                                 <TrashIcon />
                             </button>
                         </div>

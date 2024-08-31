@@ -21,7 +21,7 @@ class CartController extends Controller
 
         if (!$cart) {
             $cart = [
-                $product_id => [
+                $product->name => [
                     'id' => $product->id,
                     'name' => $product->name,
                     'qty' => 1,
@@ -32,7 +32,7 @@ class CartController extends Controller
         }
 
         if (isset($cart)) {
-            $cart[$product->id] = [
+            $cart[$product->name] = [
                 'id' => $product->id,
                 'name' => $product->name,
                 'qty' => 1,
@@ -44,12 +44,18 @@ class CartController extends Controller
 
     public function removeFromCart($product_id)
     {
+        //dd($product_id);
         $cart = session()->get('cart');
 
-        if (isset($cart[$product_id])) {
-            unset($cart[$product_id]);
-            session()->put('cart', $cart);
+        foreach ($cart as $key => $item) {
+            if ($item['name'] === $product_id) {
+                // Remove o produto do carrinho
+                unset($cart[$key]);
+                break; // Opcional: para de iterar após encontrar e remover o produto
+            }
         }
+
+        session()->put('cart', $cart);
     }
 
     public function combineToCart($product_id_1, $product_id_2)
