@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use inertia\Inertia;
 use App\Models\Info;
 use App\Models\Category;
+use App\Models\Half;
 use App\Models\Product;
 
 class AppController extends Controller
@@ -13,9 +14,11 @@ class AppController extends Controller
     public function index()
     {
         $infos = Info::first();
-        $categories = Category::with('products')->get();
-        $promotion = Product::with('category')->where('on_sale', true)->get();
-        $half = Product::with('category')->where('category_id', 3)->get();
+        $categories = Category::with(['products' => function ($query) {
+            $query->where('on_sell', true);
+        }])->get();
+        $promotion = Product::with('category')->where('on_sell', true)->where('on_sale', true)->get();
+        $half = Half::where('on_sell', true)->get();
 
         $cart = session()->get('cart');
         $total_items = $cart == null ? 0 : array_sum(array_map(fn($item) => $item['qty'], $cart));

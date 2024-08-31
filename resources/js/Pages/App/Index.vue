@@ -197,7 +197,7 @@ const addToCart = (product) => {
             </div>
 
             <div v-for="category in categories">
-                <GridProduct v-if="category.name != 'Meia Pizza'" :location="category.location" :title="category.name"
+                <GridProduct :location="category.location" :title="category.name"
                     :array="category.products" />
             </div>
         </section>

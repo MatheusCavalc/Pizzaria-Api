@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Half;
 use App\Models\Info;
 use App\Models\Product;
 use App\Models\User;
@@ -52,7 +53,6 @@ class DatabaseSeeder extends Seeder
         $categories = [
             ['name' => 'Pizzas', 'description' => 'description', 'location' => null,],
             ['name' => 'Calzones', 'description' => 'description', 'location' => null,],
-            ['name' => 'Meia Pizza', 'description' => 'description', 'location' => null,], //3
         ];
 
         foreach ($categories as $category) {
@@ -170,11 +170,16 @@ class DatabaseSeeder extends Seeder
                 'price' => '22.90',
                 'quantity' => 0,
             ],
+        ];
 
+        foreach ($products as $product) {
+            Product::create($product);
+        }
+
+        $halves = [
             //3
             [
                 'name' => 'Mussarela',
-                'category_id' => 3,
                 'link_image' => 'https://caldobom.com.br/uploads/2017/07/pizza-mussarela.jpg',
                 'description' => 'Mussarela é uma deliciosa meia pizza com queijo derretido e molho de tomate.',
                 'price' => '10.90',
@@ -182,7 +187,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Calabresa',
-                'category_id' => 3,
                 'link_image' => 'https://cdn0.tudoreceitas.com/pt/posts/9/8/3/pizza_calabresa_e_mussarela_4389_600.jpg',
                 'description' => 'Calabresa é uma meia pizza com fatias de calabresa, queijo e molho de tomate.',
                 'price' => '10.90',
@@ -190,7 +194,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Mista',
-                'category_id' => 3,
                 'link_image' => 'https://www.picanhacia.com.br/wp-content/uploads/2017/01/Pizza_quatro_queijossss-2.jpg',
                 'description' => 'Mista é uma meia pizza com uma combinação de ingredientes, incluindo queijo, presunto e outros.',
                 'price' => '10.90',
@@ -198,7 +201,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Dois Queijos',
-                'category_id' => 3,
                 'link_image' => 'https://claudia.abril.com.br/wp-content/uploads/2020/02/receita-pizza-caseira-dois-queijos.jpg',
                 'description' => 'Dois queijos é uma meia pizza com uma mistura de dois tipos de queijo derretido e molho de tomate.',
                 'price' => '10.90',
@@ -206,7 +208,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Quatro Queijos',
-                'category_id' => 3,
                 'link_image' => 'https://www.sabornamesa.com.br/media/k2/items/cache/32699af76cfc6e0191d612ffd4e88ee9_XL.jpg',
                 'description' => 'Quatro queijos é uma meia pizza com uma seleção de quatro queijos derretidos e molho de tomate.',
                 'price' => '10.90',
@@ -214,16 +215,13 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Marguerita',
-                'category_id' => 3,
                 'link_image' => 'https://anamariabraga.globo.com/wp-content/uploads/2020/08/pizza-margherita.jpg',
                 'description' => 'Marguerita é uma meia pizza com tomate, manjericão, queijo e molho de tomate.',
                 'price' => '10.90',
                 'quantity' => 0,
             ],
-
             [
                 'name' => 'Chocolate',
-                'category_id' => 3,
                 'link_image' => 'https://www.sabornamesa.com.br/media/k2/items/cache/14985840dca330e3b808aa792fa422f9_XL.jpg',
                 'description' => 'Chocolate é uma meia pizza com cobertura de chocolate derretido e ingredientes doces.',
                 'price' => '10.90',
@@ -231,7 +229,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Milho',
-                'category_id' => 3,
                 'link_image' => 'https://img.freepik.com/fotos-premium/close-up-de-uma-pizza-de-milho-com-borda-recheada-em-uma-mesa-de-madeira-clara_311379-1220.jpg?w=2000',
                 'description' => 'Milho é uma meia pizza com milho, queijo e molho de tomate.',
                 'price' => '10.90',
@@ -239,7 +236,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Portuguesa',
-                'category_id' => 3,
                 'link_image' => 'https://i.pinimg.com/736x/ce/a5/b5/cea5b566a812aba7c0bb631d4bd5d4fb.jpg',
                 'description' => 'Portuguesa é uma meia pizza com uma combinação especial de ingredientes.',
                 'price' => '10.90',
@@ -247,7 +243,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Toscana',
-                'category_id' => 3,
                 'link_image' => 'https://blog.novasafra.com.br/wp-content/uploads/2019/01/toscana-700x450.jpeg',
                 'description' => 'Toscana é uma meia pizza com ingredientes típicos da culinária toscana, incluindo linguiça e outros.',
                 'price' => '10.90',
@@ -255,7 +250,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Banana',
-                'category_id' => 3,
                 'link_image' => 'https://www.designi.com.br/images/preview/10072871.jpg',
                 'description' => 'Banana é uma meia pizza doce com fatias de banana e cobertura doce.',
                 'price' => '10.90',
@@ -263,8 +257,8 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        foreach ($products as $product) {
-            Product::create($product);
+        foreach ($halves as $half) {
+            Half::create($half);
         }
     }
 }
