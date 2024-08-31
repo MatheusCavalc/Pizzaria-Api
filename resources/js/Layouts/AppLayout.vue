@@ -7,6 +7,8 @@ import CartIcon from '@/Components/Icons/CartIcon.vue';
 import Modal from '@/Components/Modal.vue';
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
+import EditIcon from '@/Components/Icons/EditIcon.vue';
+import CheckIcon from '@/Components/Icons/CheckIcon.vue';
 
 const props = defineProps(['cart', 'total_items', 'total_value', 'infos'])
 
@@ -24,8 +26,6 @@ const showMenu = () => {
 }
 
 const removeFromCart = (product_name) => {
-    //console.log(product_name)
-    //return
     router.get(route('removeFromCart', product_name), {}, {
         preserveScroll: true,
         preserveState: true
@@ -51,7 +51,11 @@ const continueBuy = () => {
     let pedido = "Pedidos:\n";
 
     Object.values(props.cart).forEach((item, index) => {
-        pedido += `${index + 1}. ${item.name}\n`;
+        pedido += `${index + 1}. ${item.name}`;
+        if (item.observations) {
+            pedido += ` (${item.observations})`;
+        }
+        pedido += '\n';
     });
 
     pedido += `\n${addressText}\n${paymentText}`;
@@ -128,13 +132,38 @@ const continueBuy = () => {
             </div>
 
             <div v-if="total_items > 0">
-                <div class="mt-4 overflow-y-auto lg:mx-2 max-h-48 lg:max-h-64">
+                <div class="mt-4 overflow-y-auto lg:mx-2 max-h-80 lg:max-h-64">
                     <div v-for="(product, index) in cart" :key="product.id" class="px-4 py-3 mb-3 border-b">
-                        <div>
+                        <div class="flex justify-between">
                             <p>{{ product.name }}</p>
+                            <button title="Observações" @click="product.showInput = !product.showInput">
+                                <EditIcon />
+                            </button>
                         </div>
 
-                        <div class="flex justify-end gap-2 mt-1">
+                        <div class="my-3" v-show="product.showInput">
+                            <label for="observations"
+                                class="block mb-2 text-sm font-medium text-gray-900">Observações</label>
+
+                            <div class="flex gap-2">
+                                <input type="text" id="observations" placeholder="Observações do pedido"
+                                    @keyup.enter="product.showInput = false" v-model="product.observations"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
+                                    required>
+
+                                <button @click="product.showInput = false"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block p-2">
+                                    <CheckIcon />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div v-if="product.observations && !product.showInput">
+                            <p class="font-bold">Observações</p>
+                            <p class="text-gray-700">{{ product.observations }}</p>
+                        </div>
+
+                        <div class="flex justify-end gap-2 mt-5">
                             <p>R${{ product.price.replace('.', ',') }}</p>
                             <button class="text-red-700" @click="removeFromCart(product.name)">
                                 <TrashIcon />

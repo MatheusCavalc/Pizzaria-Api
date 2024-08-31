@@ -26,6 +26,8 @@ class CartController extends Controller
                     'name' => $product->name,
                     'qty' => 1,
                     'price' => $product->price,
+                    'showInput' => false,
+                    'observations' => ''
                 ]
             ];
             session()->put('cart', $cart);
@@ -37,6 +39,8 @@ class CartController extends Controller
                 'name' => $product->name,
                 'qty' => 1,
                 'price' => $product->price,
+                'showInput' => false,
+                'observations' => ''
             ];
             session()->put('cart', $cart);
         }
@@ -73,6 +77,8 @@ class CartController extends Controller
                     'name' => 'Pizza Meia ' . $product_1->name . ' + ' . 'Meia ' . $product_2->name,
                     'qty' => 1,
                     'price' => number_format((float)$product_1->price + (float)$product_2->price, 2, '.', ''),
+                    'showInput' => false,
+                    'observations' => ''
                 ]
             ];
             session()->put('cart', $cart);
@@ -84,6 +90,8 @@ class CartController extends Controller
                 'name' => 'Pizza Meia ' . $product_1->name . ' + ' . 'Meia ' . $product_2->name,
                 'qty' => 1,
                 'price' => number_format((float)$product_1->price + (float)$product_2->price, 2, '.', ''),
+                'showInput' => false,
+                'observations' => ''
             ];
             session()->put('cart', $cart);
         }
