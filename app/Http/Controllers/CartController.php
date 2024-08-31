@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Half;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -53,9 +54,9 @@ class CartController extends Controller
 
     public function combineToCart($product_id_1, $product_id_2)
     {
-        $product_1 = Product::findOrFail($product_id_1);
+        $product_1 = Half::findOrFail($product_id_1);
 
-        $product_2 = Product::findOrFail($product_id_2);
+        $product_2 = Half::findOrFail($product_id_2);
 
         $cart = session()->get('cart');
 
