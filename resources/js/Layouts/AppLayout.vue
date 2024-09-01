@@ -143,10 +143,10 @@ const continueBuy = () => {
 
                         <div class="my-3" v-show="product.showInput">
                             <label for="observations"
-                                class="block mb-2 text-sm font-medium text-gray-900">Observações</label>
+                                class="block mb-2 text-sm font-medium text-gray-900">Observações do pedido</label>
 
                             <div class="flex gap-2">
-                                <input type="text" id="observations" placeholder="Observações do pedido"
+                                <input type="text" id="observations" placeholder="Ex: Sem cebola e etc"
                                     @keyup.enter="product.showInput = false" v-model="product.observations"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
                                     required>
