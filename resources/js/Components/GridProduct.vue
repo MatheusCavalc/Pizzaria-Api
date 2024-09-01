@@ -47,10 +47,10 @@ const addToCart = (product) => {
                     class="relative flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow">
 
                     <!--Name, description, price and add button-->
-                    <div class="flex flex-col justify-between p-4 leading-normal w-7/12">
+                    <div class="flex flex-col justify-between w-7/12 p-4 leading-normal">
                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 lg:text-2xl">{{ product.name }}
                         </h5>
-                        <p @click="product.showDescription = true" class="text-gray-600 text-sm line-clamp-1">{{
+                        <p @click="product.showDescription = true" class="text-sm text-gray-600 line-clamp-1">{{
                             product.description }}</p>
                         <p class="mb-3 font-normal text-right text-red-700 lg:text-lg">R${{ product.price.replace('.',
                             ',') }}</p>
@@ -81,7 +81,7 @@ const addToCart = (product) => {
                     <Modal :show="product.showDescription" @close="product.showDescription = false">
                         <div class="w-full pt-8 pb-10 bg-white rounded-md lg:pr-8 lg:pl-9">
                             <div class="flex justify-end">
-                                <button @click="product.showDescription = false">
+                                <button class="mr-5 lg:mr-5" @click="product.showDescription = false">
                                     <CloseIcon />
                                 </button>
                             </div>
