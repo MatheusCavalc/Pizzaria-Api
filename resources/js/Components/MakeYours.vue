@@ -52,7 +52,8 @@ const addToCartPart = () => {
             <div class="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-5 lg:mx-0">
                 <div v-for="option in half" :key="option.id" class="p-1 border border-red-700 rounded">
                     <div>
-                        <img :src="option.link_image" class="object-cover w-full rounded h-28" alt="">
+                        <img v-if="option.image" :src="`storage/${option.image}`" class="object-cover w-full rounded h-28" alt="">
+                        <img v-else :src="option.link_image" class="object-cover w-full rounded h-28" alt="">
                     </div>
                     <p class="mt-1 font-bold text-center">{{ option.name }}</p>
                 </div>
@@ -97,7 +98,8 @@ const addToCartPart = () => {
 
                                 <div class="relative block w-40">
                                     <div>
-                                        <img :src="option.link_image" class="object-cover w-full h-28" alt="">
+                                        <img v-if="option.image" :src="`storage/${option.image}`" class="object-cover w-full h-28" alt="">
+                                        <img v-else :src="option.link_image" class="object-cover w-full h-28" alt="">
                                     </div>
                                     <div class="absolute bottom-0 left-0 w-full backdrop-blur-sm bg-white/30">
                                         <div class="flex justify-center w-full">
@@ -137,7 +139,8 @@ const addToCartPart = () => {
 
                                 <div class="relative block w-40">
                                     <div>
-                                        <img :src="option.link_image" class="object-cover w-full h-28" alt="">
+                                        <img v-if="option.image" :src="`storage/${option.image}`" class="object-cover w-full h-28" alt="">
+                                        <img v-else :src="option.link_image" class="object-cover w-full h-28" alt="">
                                     </div>
                                     <div class="absolute bottom-0 left-0 w-full backdrop-blur-sm bg-white/30">
                                         <div class="flex justify-center w-full">

@@ -147,7 +147,8 @@ const addToCart = (product) => {
                 <div class="gap-8 mx-4 lg:grid lg:grid-cols-2 lg:mx-20">
 
                     <div class="">
-                        <img class="object-cover w-full h-48 rounded-lg lg:h-full" :src="product.link_image" alt="">
+                        <img v-if="product.image" class="object-cover w-full h-48 rounded-lg lg:h-full" :src="`storage/${product.image}`" alt="">
+                        <img v-else class="object-cover w-full h-48 rounded-lg lg:h-full" :src="product.link_image" alt="">
                     </div>
 
                     <div class="mx-4 mt-5 lg:mt-20">

@@ -40,8 +40,9 @@ class ProductResource extends Resource
                     ->required()
                     ->label('Categoria')
                     ->searchable(),
-                //Forms\Components\FileUpload::make('image')
-                //    ->image(),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->directory('products'),
                 Forms\Components\TextInput::make('link_image')
                     ->label('Link da Imagem'),
                 Forms\Components\Toggle::make('on_sell')

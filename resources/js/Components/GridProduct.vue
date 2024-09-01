@@ -65,7 +65,10 @@ const addToCart = (product) => {
 
                     <!--Product Image-->
                     <div class="relative w-5/12">
-                        <img @click="product.showDescription = true"
+                        <img v-if="product.image" @click="product.showDescription = true"
+                            class="object-cover w-full rounded-none rounded-r-lg h-52 lg:h-64" :src="`storage/${product.image}`"
+                            :alt="product.name">
+                        <img v-else @click="product.showDescription = true"
                             class="object-cover w-full rounded-none rounded-r-lg h-52 lg:h-64" :src="product.link_image"
                             :alt="product.name">
                         <span :title="product.description" @click="product.showDescription = true"
@@ -89,7 +92,10 @@ const addToCart = (product) => {
                                 </div>
 
                                 <div class="mt-4">
-                                    <img class="object-cover w-full rounded-lg h-72" :src="product.link_image"
+                                    <img v-if="product.image" class="object-cover w-full rounded-lg h-72"
+                                        :src="`storage/${product.image}`" :alt="product.name" />
+
+                                    <img v-else class="object-cover w-full rounded-lg h-72" :src="product.link_image"
                                         :alt="product.name" />
                                 </div>
 

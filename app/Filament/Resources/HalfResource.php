@@ -34,8 +34,9 @@ class HalfResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Nome')
                     ->required(),
-                //Forms\Components\FileUpload::make('image')
-                //    ->image(),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->directory('halves'),
                 Forms\Components\TextInput::make('link_image')
                     ->label('Link da Imagem'),
                 Forms\Components\Toggle::make('on_sell')
