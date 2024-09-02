@@ -109,16 +109,16 @@ const continueBuy = () => {
                     class="flex flex-col p-4 mt-4 font-medium text-white bg-black border border-gray-100 rounded-lg md:p-0 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-black">
                     <li>
                         <a href="#Destaques"
-                            class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 ">Destaques</a>
+                            class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Destaques</a>
                     </li>
                     <li>
                         <a href="#meia"
-                            class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 ">Monte
+                            class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Monte
                             a Sua</a>
                     </li>
                     <li>
                         <a href="#Cardapio"
-                            class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 ">Cardápio</a>
+                            class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Cardápio</a>
                     </li>
                 </ul>
             </div>
