@@ -42,7 +42,7 @@ const addToCart = (product) => {
 
     <AppLayout :cart="cart" :total_items="total_items" :total_value="total_value" :infos="infos">
         <!--Home Section-->
-        <section class="bg-home py-40">
+        <section class="py-40 bg-home">
             <div class="flex justify-center">
                 <div class="">
                     <img class="object-cover w-48 h-48 border border-white rounded-full"
@@ -56,13 +56,13 @@ const addToCart = (product) => {
 
                 <div class="flex justify-center">
                     <p v-if="infos.store_open"
-                        class="py-1 px-4 order-1 lg:order-2 w-fit text-white rounded-lg border border-red-500 mt-auto animate-pulse">
-                        <p class="text-center lg:text-left mt-auto">Aberto</p>
+                        class="order-1 px-4 py-1 mt-auto text-white border border-red-500 rounded-lg lg:order-2 w-fit animate-pulse">
+                        <p class="mt-auto text-center lg:text-left">Aberto</p>
                     </p>
 
                     <p v-else
-                        class="py-1 px-4 order-1 lg:order-2 w-fit text-white rounded-lg border border-red-500 mt-auto">
-                        <p class="text-center lg:text-left mt-auto">Fechado</p>
+                        class="order-1 px-4 py-1 mt-auto text-white border border-red-500 rounded-lg lg:order-2 w-fit">
+                        <p class="mt-auto text-center lg:text-left">Fechado</p>
                     </p>
                 </div>
 
@@ -79,17 +79,17 @@ const addToCart = (product) => {
                     <div v-for="social in infos.social_links">
                         <a :href="social.link" target="_blank" class="">
                             <InstagramIcon
-                                class="w-10 h-10 fill-white transition ease-in-out hover:scale-125 delay-50 hover:-translate-y-1"
+                                class="w-10 h-10 transition ease-in-out fill-white hover:scale-125 delay-50 hover:-translate-y-1"
                                 v-if="social.social == 'Instagram'" />
                             <FacebookIcon
-                                class="w-10 h-10 fill-white transition ease-in-out hover:scale-125 delay-50 hover:-translate-y-1"
+                                class="w-10 h-10 transition ease-in-out fill-white hover:scale-125 delay-50 hover:-translate-y-1"
                                 v-if="social.social == 'Facebook'" />
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center text-white mt-4 text-base lg:text-lg">
+            <div class="mt-4 text-base text-center text-white lg:text-lg">
                 <p class="font-bold">Funcionamento</p>
                 <p>{{ infos.open_days }}</p>
                 <p>{{ infos.opening_hours }}</p>
@@ -137,6 +137,7 @@ const addToCart = (product) => {
         </div>
 
         <!--Most Requested-->
+        <a id="Destaques" />
         <section class="pb-12 lg:pb-20">
 
             <div class="pt-20 pb-8 lg:pt-12 lg:py-14">

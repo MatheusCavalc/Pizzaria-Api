@@ -9,6 +9,7 @@ import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
 import EditIcon from '@/Components/Icons/EditIcon.vue';
 import CheckIcon from '@/Components/Icons/CheckIcon.vue';
+import MenuIcon from '@/Components/Icons/MenuIcon.vue';
 
 const props = defineProps(['cart', 'total_items', 'total_value', 'infos'])
 
@@ -76,7 +77,7 @@ const continueBuy = () => {
 </script>
 
 <template>
-    <nav class="fixed top-0 left-0 z-20 w-full p-3 text-white bg-black border-b border-gray-600">
+    <nav class="fixed top-0 left-0 z-30 w-full p-3 text-white bg-black border-b border-gray-600">
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
             <a href="https://sushifortal.com.br/" class="flex items-center">
                 <img src="https://www.sabornamesa.com.br/images/receitas/pins_image/r2269-pizza-toscana-pin.jpg"
@@ -95,9 +96,14 @@ const continueBuy = () => {
                         </p>
                     </div>
                 </button>
+
+                <button @click="menu = !menu" :class="{ 'opened': menu }"
+                    class="inline-flex items-center justify-center w-10 h-10 p-1 text-sm rounded-lg stroke-white lg:hidden">
+                    <MenuIcon />
+                </button>
             </div>
 
-            <div :class="{ 'md:block': menu, 'hidden md:block': !menu }"
+            <div :class="{ 'lg:block': menu, 'hidden lg:block': !menu }"
                 class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul
                     class="flex flex-col p-4 mt-4 font-medium text-white bg-black border border-gray-100 rounded-lg md:p-0 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-black">
@@ -148,11 +154,11 @@ const continueBuy = () => {
                             <div class="flex gap-2">
                                 <input type="text" id="observations" placeholder="Ex: Sem cebola e etc"
                                     @keyup.enter="product.showInput = false" v-model="product.observations"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
+                                    class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                     required>
 
                                 <button @click="product.showInput = false"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block p-2">
+                                    class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
                                     <CheckIcon />
                                 </button>
                             </div>
