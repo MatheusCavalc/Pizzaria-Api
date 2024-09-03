@@ -16,6 +16,7 @@ const props = defineProps(['cart', 'total_items', 'total_value', 'infos'])
 const modalFormProduct = ref(false)
 const modalFormBuy = ref(false)
 
+const dispatch = ref('')
 const address = ref('')
 const payment = ref('')
 const change = ref('')
@@ -49,7 +50,7 @@ const continueBuy = () => {
     const paymentText = "Pagamento: " + payment.value;
     const changeText = 'Troco para: ' + change.value
 
-    let pedido = "Pedidos:\n";
+    let pedido = `Recebimento: ${dispatch.value}\n Pedidos:\n`;
 
     Object.values(props.cart).forEach((item, index) => {
         pedido += `${index + 1}. ${item.name}`;
@@ -59,18 +60,20 @@ const continueBuy = () => {
         pedido += '\n';
     });
 
-    pedido += `\n${addressText}\n${paymentText}`;
+    if (dispatch.value == 'Entrega') {
+        pedido += `\n${addressText}\n${paymentText}`;
+    }
 
-    if (payment.value === "Dinheiro") {
+    if (payment.value === "Dinheiro" && change.value != '') {
         pedido += `\n${changeText}`;
     }
 
     const url = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(pedido)}`;
 
-    if (address.value && payment.value) {
+    if (dispatch.value == 'Retirada' || (dispatch.value == 'Entrega' && address.value && payment.value)) {
         window.open(url, "_blank");
         modalFormProduct.value = false;
-        address.value = payment.value = '';
+        address.value = payment.value = change.value = '';
     }
 
 }
@@ -112,8 +115,7 @@ const continueBuy = () => {
                             class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Destaques</a>
                     </li>
                     <li>
-                        <a href="#meia"
-                            class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Monte
+                        <a href="#meia" class="block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:p-0 ">Monte
                             a Sua</a>
                     </li>
                     <li>
@@ -148,8 +150,8 @@ const continueBuy = () => {
                         </div>
 
                         <div class="my-3" v-show="product.showInput">
-                            <label for="observations"
-                                class="block mb-2 text-sm font-medium text-gray-900">Observações do pedido</label>
+                            <label for="observations" class="block mb-2 text-sm font-medium text-gray-900">Observações
+                                do pedido</label>
 
                             <div class="flex gap-2">
                                 <input type="text" id="observations" placeholder="Ex: Sem cebola e etc"
@@ -214,36 +216,46 @@ const continueBuy = () => {
             </div>
 
             <div class="mx-4 mt-4">
-                <div class="mb-6">
-                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Seu
-                        Endereço</label>
-                    <input type="text" id="address" placeholder="Rua, 999, Bairro" v-model="address"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                        required>
-                </div>
-                <div class="mb-6">
-                    <label for="payment" class="block mb-2 text-sm font-medium text-gray-900">Metodo
-                        de Pagamento</label>
-                    <select id="payment" v-model="payment" required
+                <div class="mb-4">
+                    <label for="dispatch" class="block mb-2 text-sm font-medium text-gray-900">Modo de Recebimento</label>
+                    <select id="dispatch" v-model="dispatch" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                        <option selected disabled>Escolha um metodo de Pagamento</option>
-                        <option value="Dinheiro">Dinheiro</option>
-                        <option value="Pix">Pix</option>
-                        <option value="Cartao de Crédito">Cartao de Crédito</option>
-                        <option value="Cartao de Debito">Cartao de Debito</option>
+                        <option selected disabled>Escolha um modo de Recebimento</option>
+                        <option value="Retirada">Retirada</option>
+                        <option value="Entrega">Entrega (Adicional no Valor Total)</option>
                     </select>
                 </div>
-                <Transition>
-                    <div v-show="payment == 'Dinheiro'" class="mb-6 transition-all duration-100">
+
+                <div v-if="dispatch == 'Entrega'">
+                    <div class="mb-4">
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Seu
+                            Endereço</label>
+                        <input type="text" id="address" placeholder="Rua, 999, Bairro" v-model="address"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="payment" class="block mb-2 text-sm font-medium text-gray-900">Metodo
+                            de Pagamento</label>
+                        <select id="payment" v-model="payment" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            <option selected disabled>Escolha um metodo de Pagamento</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Cartao de Crédito">Cartao de Crédito</option>
+                            <option value="Cartao de Debito">Cartao de Debito</option>
+                        </select>
+                    </div>
+                    <div v-show="payment == 'Dinheiro'" class="mb-4 transition-all duration-100">
                         <label for="change" class="block mb-2 text-sm font-medium text-gray-900">Troco Para</label>
                         <input type="text" id="address" placeholder="Troco" v-model="change"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                             required>
                     </div>
-                </Transition>
+                </div>
             </div>
 
-            <div class="flex flex-row-reverse mt-10 mr-4">
+            <div class="flex flex-row-reverse mt-5 mr-4">
                 <ButtonPrimary @click="continueBuy">
                     Continuar
                 </ButtonPrimary>
